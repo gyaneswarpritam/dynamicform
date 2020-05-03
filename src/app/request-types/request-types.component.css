@@ -1,0 +1,48 @@
+.form-group {
+    margin-bottom: 0.3rem;
+}
+label {
+    display: inline-block;
+    margin-bottom: 0rem;
+}
+.form-control {
+    height: calc(1.0em + .75rem + 2px);
+	padding: 0.1rem 0.3rem;
+}
+.info-span {
+    padding: 0 0.3rem;
+    color: white;
+    background-color:#563d7c !important;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.btnCalendar {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 4px 12px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .ng-autocomplete {
+    width: 100%;
+  }
+
+  .error-msg {
+    color: red;
+    font-size: 15px;
+    margin-top: -0.4rem;
+}
+  
+.asterisk {
+    color: red;
+    font-size: 10px;
+}
+  /* Darker background on mouse-over */
+  .btnCalendar:hover {
+    background-color: RoyalBlue;
+  }

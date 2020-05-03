@@ -1,17 +1,15 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from "./app-routing.module";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { ReactiveFormsModule } from "@angular/forms";
 
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
+import { DynamicFormsComponent } from "./dynamic-forms/dynamic-forms.component";
+import { MultiDynamicComponent } from "./multi-dynamic/multi-dynamic.component";
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        ReactiveFormsModule
-    ],
-    declarations: [
-        AppComponent
-    ],
-    bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  declarations: [AppComponent, DynamicFormsComponent, MultiDynamicComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

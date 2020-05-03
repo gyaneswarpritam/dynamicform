@@ -1,0 +1,1182 @@
+<div id="stepper1" class="bs-stepper">
+  <div class="bs-stepper-header">
+    <div class="step" data-target="#test-l-1">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">1</span>
+        <span class="bs-stepper-label">Information</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test-l-2">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">2</span>
+        <span class="bs-stepper-label">Job Details</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test-l-3">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">3</span>
+        <span class="bs-stepper-label">Confirmation</span>
+      </button>
+    </div>
+  </div>
+  <div class="bs-stepper-content">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div id="test-l-1" class="content">
+        <div class="row">
+          <div class="col-md-4">
+            <h4>General Information</h4>
+            <div class="card">
+              <div class="card-body">
+                <!-- <app-general-info></app-general-info> -->
+                <div class="form-group">
+                  <label
+                    >Requestor Name
+                    <i class="fa fa-asterisk asterisk"></i>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="Requestor"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.Requestor.touched &&
+                    registerFormControl.Requestor.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.Requestor.errors.required">
+                    Requestor name is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Requestor Phone</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="RequestorPhone"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.RequestorPhone.touched &&
+                    registerFormControl.RequestorPhone.errors
+                  "
+                >
+                  <div
+                    *ngIf="registerFormControl.RequestorPhone.errors.required"
+                  >
+                    Requestor Phone is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Requestor E-mail</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="RequestorEmail"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.RequestorEmail.touched &&
+                    registerFormControl.RequestorEmail.errors
+                  "
+                >
+                  <div
+                    *ngIf="registerFormControl.RequestorEmail.errors.required"
+                  >
+                    Requestor Email is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Request Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="RequestTitle"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.RequestTitle.touched &&
+                    registerFormControl.RequestTitle.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.RequestTitle.errors.required">
+                    Request Title is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Platform</label>
+                  <select
+                    class="form-control"
+                    id="BusUnit"
+                    formControlName="BusUnit"
+                    (change)="platformDropdownDisplay($event)"
+                  >
+                    <option value="">Please select an option</option>
+                    <option
+                      *ngFor="let platformVal of platformValue"
+                      [value]="platformVal.PLATFORMID"
+                    >
+                      {{ platformVal.PLATFORM1 }}</option
+                    >
+                  </select>
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.BusUnit.touched &&
+                    registerFormControl.BusUnit.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.BusUnit.errors.required">
+                    Platform is required
+                  </div>
+                </div>
+                <div *ngIf="CARDOmaha">
+                  <div class="form-group">
+                    <label>Platform</label>
+                    <select class="form-control" formControlName="SubPlatform">
+                      <option value="">- Select -</option>
+                      <option value="FDRNDM01">FDRNDM01</option>
+                      <option value="FDRNDM02">FDRNDM02</option>
+                      <option value="THRNDM01">THRNDM01</option>
+                      <option value="SECNDM01">SECNDM01</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Client Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="ClientNumber"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Sys & Prin</label>
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="Sys"
+                        size="4"
+                        maxlength="4"
+                      />
+                      <span class="input-group-addon">-</span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="Prin"
+                        size="4"
+                        maxlength="4"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="MerchantNorth">
+                  <div class="form-group">
+                    <label>Sub Platform</label>
+                    <div class="input-group">
+                      <select class="form-control" formControlName="PlatformIn">
+                        <option value="">- Select -</option>
+                        <option value="ESCDMT/P">ESCDMT/P</option>
+                        <option value="ESCDMR/S">ESCDMR/S</option>
+                      </select>
+                      <span class="input-group-addon">-</span>
+                      <select
+                        class="form-control"
+                        formControlName="PlatformIn1"
+                      >
+                        <option value="">- Select -</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                        <option value="O">O</option>
+                        <option value="P">P</option>
+                        <option value="Q">Q</option>
+                        <option value="R">R</option>
+                        <option value="U">U</option>
+                        <option value="V">V</option>
+                        <option value="W">W</option>
+                      </select>
+                      <span class="input-group-addon">-</span>
+                      <select
+                        class="form-control"
+                        formControlName="PlatformIn2"
+                      >
+                        <option value="">- Select -</option>
+                        <option value="C">C</option>
+                        <option value="L">L</option>
+                        <option value="S">S</option>
+                        <option value="T">T</option>
+                        <option value="X">X</option>
+                        <option value="Y">Y</option>
+                        <option value="Z">Z</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Security Code</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="SecurityCodeIn"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Merchant ID</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="MerchantID"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="MerchantSouth">
+                  <div class="form-group">
+                    <label>Merchant ID</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="MerchantID1"
+                    />
+                  </div>
+                </div>
+                <div *ngIf="Star_SE_SW">
+                  <div class="form-group">
+                    <label>PRC / INT ID</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="PrcIntID"
+                      size="6"
+                      maxlength="6"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>PRC / INT Location</label>
+                    <select
+                      class="form-control"
+                      formControlName="PrcIntLocation"
+                    >
+                      <option value="">- Select -</option>
+                      <option value="East">East</option>
+                      <option value="West">West</option>
+                    </select>
+                  </div>
+                </div>
+                <div *ngIf="Srat_NE">
+                  <div class="form-group">
+                    <label>Participant ID</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="EndpointID"
+                    />
+                  </div>
+                </div>
+                <div *ngIf="TransArmor">
+                  <div class="form-group">
+                    <label>Merchant ID</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="MerchantID2"
+                    />
+                  </div>
+                </div>
+                <div *ngIf="Other_NA">
+                  <div class="form-group">
+                    <label>Other System Creating / Receiving File(s)</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="OtherSystemCRFile"
+                    />
+                  </div>
+                </div>
+                <div *ngIf="Other_EMEA">
+                  <div class="form-group">
+                    <label>Other System Creating / Receiving File(s)</label>
+                    <select
+                      class="form-control"
+                      formControlName="EmeaOtherSystem"
+                    >
+                      <option value="">- Select -</option>
+                      <option value="BRIO.Germany ">BRIO.Germany</option>
+                      <option value="ERP/Goleo">ERP/Goleo</option>
+                      <option value="CTRL+M BMC Scheduler"
+                        >CTRL+M BMC Scheduler</option
+                      >
+                      <option value="German Mainframe - sftp"
+                        >German Mainframe - sftp</option
+                      >
+                      <option value="A+ DRS"
+                        >A+ Dispute Resolution System</option
+                      >
+                      <option value="First Vision">First Vision</option>
+                      <option
+                        value="EMEA Stratus and HP NSK Capacity Management Application"
+                        >EMEA Stratus and HP NSK Capacity Management
+                        Application</option
+                      >
+                      <option value="First Online 2.0"
+                        >First Online 2.0 (aka Cinema)</option
+                      >
+                      <option value="Riskshield Merchant"
+                        >Riskshield Merchant</option
+                      >
+                      <option value="Base24.Germany.NAG1"
+                        >Base24.Germany.NAG1</option
+                      >
+                      <option value="eSolutions.IPG - Internet Payment Gateway"
+                        >eSolutions.IPG - Internet Payment Gateway</option
+                      >
+                      <option value="UK Mainframe - C:D"
+                        >UK Mainframe - C:D</option
+                      >
+                      <option value="EPS-Bridge.Germany"
+                        >EPS-Bridge.Germany</option
+                      >
+                      <option value="Base24-eps.Germany.ISS"
+                        >Base24-eps.Germany.ISS</option
+                      >
+                      <option value="Base24.Germany.FDM1"
+                        >Base24.Germany.FDM1</option
+                      >
+                      <option value="Base24-eps.Germany.ACQ"
+                        >Base24-eps.Germany.ACQ</option
+                      >
+                      <option value="Base24.Germany.PRO1"
+                        >Base24.Germany.PRO1</option
+                      >
+                      <option value="BASE24-eps.Germany.PRO2"
+                        >BASE24-eps.Germany.PRO2</option
+                      >
+                      <option value="Base24-eps.Germany.NAG2"
+                        >Base24-eps.Germany.NAG2</option
+                      >
+                      <option value="EMEA SOA ENTERPRISE"
+                        >EMEA SOA ENTERPRISE</option
+                      >
+                      <option value="CLASS-ONLINE">CLASS-ONLINE</option>
+                      <option value="APS System">APS System</option>
+                      <option value="EMEA Merchant Portal"
+                        >EMEA Merchant Portal</option
+                      >
+                      <option value="eSolutions.UCOM">eSolutions.UCOM</option>
+                      <option value="OmniPay BackEnd Processing"
+                        >OmniPay BackEnd Processing</option
+                      >
+                      <option value="Advantage (ADV).Germany"
+                        >Advantage (ADV).Germany</option
+                      >
+                      <option value="MessageWay 6.0 - Brazil"
+                        >MessageWay 6.0 - Brazil</option
+                      >
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleLanId">Merchant Alliance</label>
+                  <select
+                    class="form-control"
+                    id="alliance"
+                    formControlName="AllianceName"
+                  >
+                    <option value="">Please select an option</option>
+                    <option
+                      *ngFor="let alliance of allianceName"
+                      [value]="alliance.AllianceID"
+                    >
+                      {{ alliance.Alliance1 }}</option
+                    >
+                  </select>
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.AllianceName.touched &&
+                    registerFormControl.AllianceName.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.AllianceName.errors.required">
+                    Alliance is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Requested Test Date</label>
+                  <div class="input-group">
+                    <!-- <input type="text" ngbDatepicker #d="ngbDatepicker" class="form-control" formControlName="TestDate" placeholder="mm/dd/yyyy">
+                                        <div class="input-group-append">
+                                            <button class="btnCalendar" (click)="d.toggle()"><i class="fa fa-calendar"></i></button>
+                                        </div> -->
+                    <input
+                      type="text"
+                      placeholder="Datepicker"
+                      class="form-control"
+                      formControlName="TestDate"
+                      autocomplete="off"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.TestDate.touched &&
+                    registerFormControl.TestDate.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.TestDate.errors.required">
+                    Test Date is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Requested Production Date</label>
+                  <input
+                    type="text"
+                    placeholder="Datepicker"
+                    class="form-control"
+                    formControlName="ProdDate"
+                    autocomplete="off"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.ProdDate.touched &&
+                    registerFormControl.ProdDate.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.ProdDate.errors.required">
+                    Production Date is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Change Record Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="CRNum"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Project Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="PRJ_number"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Service Center Ticket Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="SC_number"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h4>Client Information</h4>
+            <div class="card">
+              <div class="card-body">
+                <!-- <app-client-info></app-client-info> -->
+                <div class="form-group">
+                  <label>Client / Merchant Name</label>
+                  <a
+                    class="info-a"
+                    placement="top"
+                    ngbTooltip="Enter the Client Name"
+                  >
+                    <span class="info-span">i</span>
+                  </a>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="ClientName"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.ClientName.touched &&
+                    registerFormControl.ClientName.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.ClientName.errors.required">
+                    Client Name is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Client Contact Name</label>
+                  <input
+                    type="text"
+                    id="typeahead-basic"
+                    class="form-control"
+                    formControlName="ClientContact"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.ClientContact.touched &&
+                    registerFormControl.ClientContact.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.ClientName.errors.required">
+                    Client Contact Name is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Client Contact Phone</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="ClientPhone"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.ClientPhone.touched &&
+                    registerFormControl.ClientPhone.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.ClientPhone.errors.required">
+                    Client Contact Phone is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Client Contact E-mail</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="ClientEmail"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.ClientEmail.touched &&
+                    registerFormControl.ClientEmail.errors
+                  "
+                >
+                  <div *ngIf="registerFormControl.ClientEmail.errors.required">
+                    Client Contact E-mail is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Client Service Representative</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="Client_Services_Rep"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.Client_Services_Rep.touched &&
+                    registerFormControl.Client_Services_Rep.errors
+                  "
+                >
+                  <div
+                    *ngIf="
+                      registerFormControl.Client_Services_Rep.errors.required
+                    "
+                  >
+                    Client Reresentative Name is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Client Help Desk(24x7) Phone</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="HelpDeskPhone"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl.HelpDeskPhone.touched &&
+                    registerFormControl.HelpDeskPhone.errors
+                  "
+                >
+                  <div
+                    *ngIf="registerFormControl.HelpDeskPhone.errors.required"
+                  >
+                    Client Helpdesk Phone is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Client Help Desk(24x7) E-mail</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="Client_Help_Desk_and_or_24_7_email_address"
+                  />
+                </div>
+                <div
+                  class="error-msg"
+                  *ngIf="
+                    registerFormControl
+                      .Client_Help_Desk_and_or_24_7_email_address.touched &&
+                    registerFormControl
+                      .Client_Help_Desk_and_or_24_7_email_address.errors
+                  "
+                >
+                  <div
+                    *ngIf="
+                      registerFormControl
+                        .Client_Help_Desk_and_or_24_7_email_address.errors
+                        .required
+                    "
+                  >
+                    Client Helpdesk E-mail is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Request Summary</label>
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    cols="72"
+                    formControlName="Comments"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h4>Method / System Information</h4>
+            <div class="card">
+              <div class="card-body">
+                <!-- <app-method-info [events]="eventsSubject.asObservable()"></app-method-info> -->
+                <div class="form-group">
+                  <label>Direction of File Transmissions To SFG</label>
+                  <select
+                    class="form-control"
+                    formControlName="Xmit_Direction"
+                    id="Xmit_Direction"
+                    (change)="changeTransmissionDirection($event)"
+                  >
+                    <option value="">-- SELECT --</option>
+                    <option value="Incoming">Incoming Only</option>
+                    <option value="Outgoing">Outgoing Only</option>
+                    <option value="Both">Both Incoming & Outgoing</option>
+                  </select>
+                </div>
+                <div *ngIf="incoming">
+                  <div class="form-group">
+                    <label>Incoming Transmission Job Count</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="IncomingCount"
+                      (change)="incomingJobCount($event)"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Transmission Method From Client To SFG</label>
+                    <select class="form-control" formControlName="XmitMethod">
+                      <option value="">- Select -</option>
+                      <option value="Connect:Direct">Connect:Direct</option>
+                      <option value="HTTPS">HTTPS</option>
+                      <option value="SFTP">SFTP</option>
+                      <option value="FTPS">FTPS</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Transmission Method From SFG To Platform</label>
+                    <select
+                      class="form-control"
+                      formControlName="Platform_XmitMethod"
+                    >
+                      <option value="">- Select - </option>
+                      <option value="Connect:Direct">Connect:Direct</option>
+                      <option value="SFTP Push">SFTP Push</option>
+                      <option value="FTPS Push">FTPS Push</option>
+                      <option value="HTTPS">HTTPS</option>
+                      <option value="Pickup Mailbox">Pickup Mailbox</option>
+                    </select>
+                  </div>
+                </div>
+                <div *ngIf="outgoing">
+                  <div class="form-group">
+                    <label>Outgoing Transmission Job Count</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="OutgoingCount"
+                      (change)="outgingJobCount($event)"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Transmission Method From Platform To SFG</label>
+                    <select
+                      class="form-control"
+                      formControlName="Platform_XmitMethodOut"
+                    >
+                      <option value="">- Select - </option>
+                      <option value="Connect:Direct">Connect:Direct</option>
+                      <option value="SFTP Push">SFTP Push</option>
+                      <option value="FTPS Push">FTPS Push</option>
+                      <option value="HTTPS">HTTPS</option>
+                      <option value="Pickup Mailbox">Pickup Mailbox</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Transmission Method From SFG To Client</label>
+                    <select
+                      class="form-control"
+                      formControlName="XmitMethodOut"
+                    >
+                      <option value="">- Select - </option>
+                      <option value="Connect:Direct">Connect:Direct</option>
+                      <option value="SFTP Push">SFTP Push</option>
+                      <option value="FTPS Push">FTPS Push</option>
+                      <option value="HTTPS">HTTPS</option>
+                      <option value="Pickup Mailbox">Pickup Mailbox</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Existing User Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="MWUser"
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Existing Transmissions User</label>
+                  <select
+                    class="form-control"
+                    formControlName="ExistingCommunity"
+                  >
+                    <option value="">- Select - </option>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Existing User / Mailbox Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="CommunityName"
+                  />
+                </div>
+                <div>
+                  <label>User Protocol</label>
+                  <select
+                    class="form-control"
+                    formControlName="CommunityProtocol"
+                    (change)="userProtocolChange($event)"
+                  >
+                    <option value="">- Select - </option>
+                    <option value="Connect_Direct"
+                      >FDC Connect:Direct Delivery</option
+                    >
+                    <option value="SFTP_Push">FDC SSH/SFTP Delivery</option>
+                    <option value="FTPS_Push">FDC FTP/SSL Delivery</option>
+                    <option value="Pickup_Mailbox">FDC Mailbox Delivery</option>
+                  </select>
+                </div>
+                <!-- dropdown selection for Connect:direct  -->
+                <div *ngIf="userProtocol == 'Connect_Direct'">
+                  <div>
+                    <label>Local Node Name*:</label>
+                    <select
+                      class="form-control"
+                      formControlName="Connect_In_Local_Node_Name"
+                    >
+                      <option value="">- Select - </option>
+                      <option value="Internal">Internal</option>
+                      <option value="External">External</option>
+                      <option value="Clientnet">Clientnet</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Remote Node Name*:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="Connect_In_Remote_Node_Name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Certificate to be an attachment:</label>
+                    <input
+                      type="file"
+                      formControlName="Connect_In_certificate"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Remote User ID:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="Connect_In_User_ID"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Password:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="Connect_In_Remote_Password"
+                    />
+                  </div>
+                </div>
+                <!-- dropdown selection based fields for SFTP-->
+                <div *ngIf="userProtocol == 'SFTP_Push'">
+                  <div class="form-group">
+                    <label>Remote User*:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="SFTP_IN_Remote_User"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Remote Host*:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="SFTP_IN_Remote_Host"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Remote Port*:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="SFTP_IN_Remote_Port"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Remote Directory*:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="SFTP_IN_Remote_Directory"
+                    />
+                  </div>
+                </div>
+
+                <!-- drop down selection for FTPS based fields-->
+                <div *ngIf="userProtocol == 'FTPS_Push'">
+                  <div class="form-group">
+                    <label>Host Name*:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="FTPS_In_FTP"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>FTPS Listen Port*:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="FTPS_In_FTP_Server"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>FTPS Connection Type*:</label>
+                    <select
+                      class="form-control"
+                      formControlName="FTPS_Connection_Type"
+                    >
+                      <option value="">- Select - </option>
+                      <option value="Active">Active</option>
+                      <option value="Passive">Passive</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>FTPS User Name*:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="FTPS_In_User"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Password:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="FTPS_In_Password"
+                    />
+                  </div>
+                </div>
+
+                <!--drop down for MailboxDelivery fields-->
+                <div *ngIf="userProtocol == 'Pickup_Mailbox'">
+                  <div class="form-group">
+                    <label>Pickup Mailbox Name:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="PickupMailboxName"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Upload Questionnaire Form</label>
+                  <input type="file" formControlName="Quest_Form" />
+                </div>
+                <div class="form-group">
+                  <label>Upload SSH Key / SSL Cert (Text file only)</label>
+                  <input type="file" formControlName="SSHKey" />
+                </div>
+                <div class="form-group">
+                  <label>Upload PGP Key (Text file only)</label>
+                  <input type="file" formControlName="PGPkey" />
+                </div>
+                <!-- <div class="form-group">
+                                    <label>Upload Jobs List (Excel file only)</label>
+                                    <input type="file" formControlName="clientHDEmail">
+                                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <button (click)="next()" class="btn btn-primary" style="float: right;">
+          Next
+        </button>
+      </div>
+      <div id="test-l-2" class="content">
+        <!-- <div *ngIf="incoming"> -->
+        <div class="row">
+          <ng-container *ngIf="incoming && incomingJobTotal">
+            <div class="col-md-12" style="color: #007bff;">
+              <b>Incoming File Details</b>
+            </div>
+            <div
+              class="col-md-4"
+              *ngFor="let incomingFile of incomingJobTotal; let i = index"
+            >
+              <p>Incoming File {{ incomingFile }}---{{ i }}</p>
+              <div class="form-group">
+                <label>Job Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="JobnameIn_{{ i }}"
+                />
+              </div>
+              <div class="form-group">
+                <label>Processing Type / Product </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="ProductIn_{{ i }}"
+                />
+              </div>
+              <div class="form-group">
+                <label>Funding File</label>
+                <select
+                  class="form-control"
+                  formControlName="FundingIn_{{ i }}"
+                  (change)="fundingInDropdownDisplay($event, i)"
+                >
+                  <option value="">Please select an option</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div *ngIf="fundingIn_yes">
+                <div class="form-group">
+                  <label>Average Funding Amount</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="FundingAvgIn"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Service Level Agreement (SLA)</label>
+                <select
+                  class="form-control"
+                  formControlName="SLAIn"
+                  id="SLAIn"
+                  (change)="SLAInDropdownDisplay($event)"
+                >
+                  <option value="">Please select an option</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div *ngIf="SLAIn_yes">
+                <div class="form-group">
+                  <label>SLA Date(s) / Time(s)</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="SLADetailsIn"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Existing Job to Copy</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="CopyJobIn"
+                />
+              </div>
+              <div class="form-group">
+                <label>Destination Dataset / Filename</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="DestinationFileIn"
+                />
+              </div>
+              <div class="form-group">
+                <label>E-mail To Receive Notifications</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="ReceiptNotifyToIn"
+                />
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="outgoing && outgoingJobTotal">
+            <div class="col-md-12" style="color: #007bff;">
+              <b>Outging File Details</b>
+            </div>
+
+            <div
+              class="col-md-4"
+              class="col-md-4"
+              *ngFor="let outgoingFile of outgoingJobTotal"
+            >
+              <p>Outgoing File {{ outgoingFile }}</p>
+              <div class="form-group">
+                <label>Job Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="JobnameOut"
+                />
+              </div>
+              <div class="form-group">
+                <label>Processing Type / Product </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="ProductOut"
+                />
+              </div>
+              <div class="form-group">
+                <label>Funding File</label>
+                <select
+                  class="form-control"
+                  id="Funding"
+                  formControlName="FundingOut"
+                  (change)="fundingOutDropdownDisplay($event)"
+                >
+                  <option value="">Please select an option</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div *ngIf="fundingOut_yes">
+                <div class="form-group">
+                  <label>Average Funding Amount</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="FundingAvgOut"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Service Level Agreement (SLA)</label>
+                <select
+                  class="form-control"
+                  id="SLA"
+                  formControlName="SLAOut"
+                  (change)="SLAOutDropdownDisplay($event)"
+                >
+                  <option value="">Please select an option</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div *ngIf="SLAOut_yes">
+                <div class="form-group">
+                  <label>SLA Date(s) / Time(s)</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="SLADetailsOut"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Existing Job to Copy</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="CopyJobOut"
+                />
+              </div>
+              <div class="form-group">
+                <label>Source Dataset / Filename</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="SourceFile"
+                />
+              </div>
+              <div class="form-group">
+                <label>E-mail To Receive Notifications</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="ReceiptNotifyToOut"
+                />
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <!-- </div> -->
+
+        <!-- <div *ngIf="outgoing"> -->
+
+        <!-- </div> -->
+        <button (click)="next()" class="btn btn-primary">Next</button>
+      </div>
+      <div id="test-l-3" class="content text-center">
+        <button type="submit" class="btn btn-primary mt-5">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
